@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  # 🧠 User Service - Node.js microservice
+  user-service:
+    build:
+      context: ./user-service         # Directory where the Dockerfile for the user-service is located
+    container_name: user-service-api  # Name for the container
+    ports:
+      - "3000:3000"                    # Map container port 3000 to host port 3000
+    env_file:
+      - ./user-service/.env           # Load environment variables (like MONGODB_URI) from .env file
+    depends_on:
+      - mongo                         # Ensure MongoDB service starts before user-service
+
+  # 🍃 MongoDB Service - Optional (used if you want local MongoDB instance)
+  mongo:
+    image: mongo:6.0                  # MongoDB Docker image (version 6.0)
+    container_name: user-mongo        # Name for the MongoDB container
+    restart: always                   # Restart policy: restart on failure or Docker restart
+    ports:
+      - "27017:27017"                 # Map MongoDB's port 27017 to host
+    # ⚠️ No credentials set here – assumes external MongoDB access using URI from .env
+
+# 🗂️ Define Docker volume to persist MongoDB data (used only if local MongoDB is enabled)
+volumes:
+  mongo-data:
