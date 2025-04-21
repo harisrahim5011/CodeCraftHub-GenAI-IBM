@@ -15,7 +15,8 @@ npm run dev
 
 ## Env Variables
 ```
-MONGO_URI=mongodb://localhost:27017/user-service
+<!-- MONGO_URI=mongodb://localhost:27017/user-service -->
+MONGODB_URI=mongodb://root:368Fz3Z3l2EMUQfvRFlifPKw@172.21.96.23:27017
 PORT=3000
 ```
 
